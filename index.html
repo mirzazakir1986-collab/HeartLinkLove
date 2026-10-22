@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HeartLink ❤️</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff5f8;color:#29202a}
+header{background:#e83e70;color:white;padding:22px;text-align:center}
+header h1{margin:0;font-size:30px}
+.hero{text-align:center;padding:45px 20px;background:linear-gradient(135deg,#ffe0eb,#fff5f8)}
+.hero h2{font-size:30px;color:#c51e58}
+.hero p{line-height:1.6}
+.card{background:white;padding:24px;margin:20px auto;border-radius:18px;max-width:450px;box-shadow:0 5px 20px #e6bfd0}
+input,textarea,select,button{width:100%;padding:13px;margin:8px 0;border:1px solid #e0cbd4;border-radius:10px;font-size:16px}
+button{background:#e83e70;color:white;border:0;font-weight:bold;cursor:pointer}
+label{font-size:14px}
+footer{text-align:center;padding:25px;color:#765766}
+</style>
+</head>
+<body>
+<header><h1>❤️ HeartLink</h1><p>Real Connections. Meaningful Relationships.</p></header>
+<section class="hero">
+<h2>Find Your Heart's Connection</h2>
+<p>Meet new people, discover shared interests and build meaningful connections.</p>
+<button onclick="document.getElementById('profile').scrollIntoView({behavior:'smooth'})">Create Your Profile</button>
+</section>
+<section class="card" id="profile">
+<h2>💕 Create Your Profile</h2>
+<form id="profileForm">
+<label>Display Name</label>
+<input id="name" placeholder="Enter your name" required>
+<label>Age (18+ only)</label>
+<input id="age" type="number" min="18" max="100" placeholder="Your age" required>
+<label>Gender</label>
+<select id="gender" required>
+<option value="">Select gender</option>
+<option>Woman</option><option>Man</option><option>Non-binary</option><option>Prefer not to say</option>
+</select>
+<label>City</label>
+<input id="city" placeholder="Your city" required>
+<label>About You</label>
+<textarea id="bio" placeholder="Tell people about yourself" required></textarea>
+<label><input type="checkbox" id="adult" required style="width:auto"> I confirm I am 18 or older and will respect other users.</label>
+<button type="submit">Preview Profile</button>
+</form>
+<div id="result" hidden></div>
+</section>
+<footer>❤️ HeartLink | Connect with respect<br><small>Demo version — profiles are not uploaded or saved online yet.</small></footer>
+<script>
+document.getElementById('profileForm').addEventListener('submit',function(e){
+e.preventDefault();
+const name=document.getElementById('name').value.trim();
+const age=Number(document.getElementById('age').value);
+if(age<18){alert('HeartLink is for adults aged 18 and above.');return;}
+const result=document.getElementById('result');
+result.hidden=false;
+result.innerHTML='<hr><h2>❤️ '+escapeText(name)+'</h2><p>'+age+' years old · '+escapeText(document.getElementById('city').value)+'</p><p>'+escapeText(document.getElementById('gender').value)+'</p><p>'+escapeText(document.getElementById('bio').value)+'</p><p><b>Preview only — not published.</b></p>';
+});
+function escapeText(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+</script>
+</body>
+</html>
