@@ -48,16 +48,48 @@ footer{text-align:center;padding:25px;color:#765766}
 </section>
 <footer>❤️ HeartLink | Connect with respect<br><small>Demo version — profiles are not uploaded or saved online yet.</small></footer>
 <script>
-document.getElementById('profileForm').addEventListener('submit',function(e){
-e.preventDefault();
-const name=document.getElementById('name').value.trim();
-const age=Number(document.getElementById('age').value);
-if(age<18){alert('HeartLink is for adults aged 18 and above.');return;}
-const result=document.getElementById('result');
-result.hidden=false;
-result.innerHTML='<hr><h2>❤️ '+escapeText(name)+'</h2><p>'+age+' years old · '+escapeText(document.getElementById('city').value)+'</p><p>'+escapeText(document.getElementById('gender').value)+'</p><p>'+escapeText(document.getElementById('bio').value)+'</p><p><b>Preview only — not published.</b></p>';
+document.getElementById('profileForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const age = Number(document.getElementById('age').value);
+  const gender = document.getElementById('gender').value;
+  const city = document.getElementById('city').value.trim();
+  const bio = document.getElementById('bio').value.trim();
+  const adult = document.getElementById('adult').checked;
+
+  const result = document.getElementById('result');
+  result.hidden = false;
+
+  if (age < 18) {
+    result.textContent = 'HeartLink is for adults aged 18+ only.';
+    return;
+  }
+
+  if (!adult) {
+    result.textContent = 'Please confirm that you are 18 or older.';
+    return;
+  }
+
+  result.textContent = 'Saving your profile...';
+
+  const { error } = await supabaseClient
+    .from('profiles')
+    .insert({
+      full_name: name,
+      age: age,
+      gender: gender,
+      city: city,
+      bio: bio
+    });
+
+  if (error) {
+    result.textContent = 'Error saving profile: ' + error.message;
+    return;
+  }
+
+  result.textContent = '❤️ Your HeartLink profile was saved successfully!';
 });
-function escapeText(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
