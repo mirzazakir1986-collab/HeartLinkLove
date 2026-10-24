@@ -47,6 +47,15 @@ footer{text-align:center;padding:25px;color:#765766}
 <div id="result" hidden></div>
 </section>
 <footer>❤️ HeartLink | Connect with respect<br><small>Demo version — profiles are not uploaded or saved online yet.</small></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://ximobtpxelccmqxzaqqz.supabase.co";
+const SUPABASE_KEY = "sb_publishable_jhrfDw9JtUOqYCc8Rld84w_e-N-Z1_a";
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+</script>
 <script>
 document.getElementById('profileForm').addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -91,14 +100,6 @@ document.getElementById('profileForm').addEventListener('submit', async function
   result.textContent = '❤️ Your HeartLink profile was saved successfully!';
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL = "https://ximobtpxelccmqxzaqqz.supabase.co";
-const SUPABASE_KEY = "sb_publishable_jhrfDw9JtUOqYCc8Rld84w_e-N-Z1_a";
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-</script>
+
 </body>
 </html>
