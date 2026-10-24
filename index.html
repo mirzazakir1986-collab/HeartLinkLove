@@ -48,7 +48,7 @@ footer{text-align:center;padding:25px;color:#765766}
 </section>
 <footer>❤️ HeartLink | Connect with respect<br><small>Demo version — profiles are not uploaded or saved online yet.</small></footer>
 <script>
-document.getElementById('profileForm').addEventListener('submit', async (e) => {
+document.getElementById('profileForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
   const name = document.getElementById('name').value.trim();
